@@ -38,13 +38,27 @@ class MoviesListWidget extends StatelessWidget {
                 // nombre d'éléments de la liste à créer
                 itemCount: movies.length,
 
+                // éviter le conflit de défilement vertical entre l'application et la liste
+                physics: NeverScrollableScrollPhysics(),
+
                 // créer chaque élément de la liste
                 itemBuilder: (context, index) {
                   /*
 						? : exécuter la partie de droite si la partie de gauche n'est pas nulle
 						! : indiquer que la valeur n'est pas nulle
 					*/
-                  return Text(movies[index].title!);
+                  return ListTile(
+                    leading: Image.network(
+                      movies[index].movie_banner!,
+                      width: 80,
+                    ),
+                    title: Text(movies[index].title!),
+                    subtitle: Text(movies[index].original_title!),
+                    trailing: Icon(Icons.chevron_right),
+
+                    // événement onTap : appui
+                    onTap: () => inspect(movies[index]),
+                  );
                 },
               );
             }
