@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:ghibli/models/movie.dart';
 import 'package:ghibli/services/movies_api_service.dart';
+import 'package:go_router/go_router.dart';
 
 class MoviesListWidget extends StatelessWidget {
   const MoviesListWidget({super.key});
@@ -57,7 +58,12 @@ class MoviesListWidget extends StatelessWidget {
                     trailing: Icon(Icons.chevron_right),
 
                     // événement onTap : appui
-                    onTap: () => inspect(movies[index]),
+                    /*
+                      utiliser le contexte pour naviguer
+                        push : ajouter un écran au-dessus de l'écran affiché, en se basant sur le schéma de la route
+                        pushNamed : ajouter un écran au-dessus de l'écran affiché, en se basant sur la nom de la route
+                    */
+                    onTap: () => context.push('/movie/${movies[index].id}'),
                   );
                 },
               );

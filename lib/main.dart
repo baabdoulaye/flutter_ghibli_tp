@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:ghibli/screens/home_screen.dart';
+import 'package:ghibli/services/router_service.dart';
 import 'package:ghibli/theme/app_theme.dart';
 
 /*
@@ -26,10 +27,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // MaterialApp permet de créer une application avec la bibliothèque de design Material (Android)
     // chaque widget possède des paramètres nommés et promus
-    return MaterialApp(
+    // activer le routeur
+    return MaterialApp.router(
       title: 'Studio Ghibli',
       theme: AppTheme().getTheme(),
-      home: HomeScreen(),
+      routerConfig: RouterService().getRouter(),
+      // home: HomeScreen(),
     );
   }
 }
