@@ -1,3 +1,4 @@
+// screens/movie_screen.dart
 import 'package:flutter/material.dart';
 import 'package:ghibli/widgets/movie/movie_widget.dart';
 import 'package:ghibli/widgets/shared/appbar_widget.dart';

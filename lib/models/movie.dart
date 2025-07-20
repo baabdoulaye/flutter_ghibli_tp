@@ -1,3 +1,4 @@
+//movie.dart
 class Movie {
   // propriétés
   // dart n'affecte pas une valeur nulle par défaut aux propriétés sans valeur

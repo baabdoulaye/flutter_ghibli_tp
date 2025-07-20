@@ -1,4 +1,4 @@
-import 'dart:developer';
+// widgets/home/movies_list_widget.dart
 import 'package:flutter/material.dart';
 import 'package:ghibli/models/movie.dart';
 import 'package:ghibli/services/movies_api_service.dart';
@@ -16,20 +16,24 @@ class MoviesListWidget extends StatelessWidget {
     */
     // inspect(MoviesApiService().getMovies());
 
+    // Crée une instance unique du service API
+    final MoviesApiService moviesApiService =
+        MoviesApiService(); // <-- Correction ici
+
     return Column(
       children: [
         Text('Movies', style: Theme.of(context).textTheme.titleMedium),
         /*
-			pour accéder aux données d'une future, il est obligatoire d'utiliser le widget FutureBuilder
-		*/
+          pour accéder aux données d'une future, il est obligatoire d'utiliser le widget FutureBuilder
+        */
         FutureBuilder(
-          future: MoviesApiService().getMovies(),
+          future: moviesApiService.getMovies(), // <-- Utilise l'instance créée
           builder: (context, snapshot) {
             // snapshot contient les données de la future
             // si les données sont disponibles
             if (snapshot.hasData) {
               // récupérer les données de la future
-              List<Movie> movies = snapshot.requireData;
+              List<Movie> movies = snapshot.requireData as List<Movie>;
 
               // afficher une liste défilante
               return ListView.builder(
@@ -45,13 +49,22 @@ class MoviesListWidget extends StatelessWidget {
                 // créer chaque élément de la liste
                 itemBuilder: (context, index) {
                   /*
-						? : exécuter la partie de droite si la partie de gauche n'est pas nulle
-						! : indiquer que la valeur n'est pas nulle
-					*/
+                    ? : exécuter la partie de droite si la partie de gauche n'est pas nulle
+                    ! : indiquer que la valeur n'est pas nulle
+                  */
                   return ListTile(
                     leading: Image.network(
                       movies[index].movie_banner!,
                       width: 80,
+                      errorBuilder: (context, error, stackTrace) {
+                        // Ajout d'un errorBuilder pour les images
+                        return Container(
+                          width: 80,
+                          height: 80,
+                          color: Colors.grey[300],
+                          child: const Icon(Icons.broken_image, size: 40),
+                        );
+                      },
                     ),
                     title: Text(movies[index].title!),
                     subtitle: Text(movies[index].original_title!),

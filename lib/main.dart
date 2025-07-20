@@ -1,3 +1,4 @@
+//main.dart
 /*
   fonction main : démarrer l'application dart
     - dart est un langage typé : variables, paramètres, retour de fonction…
@@ -5,7 +6,6 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:ghibli/screens/home_screen.dart';
 import 'package:ghibli/services/router_service.dart';
 import 'package:ghibli/theme/app_theme.dart';
 
